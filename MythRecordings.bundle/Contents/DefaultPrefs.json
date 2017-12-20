@@ -1,0 +1,68 @@
+[
+    {
+        "id": "server",
+        "type": "text",
+        "label": "Server Name",
+        "default": "127.0.0.1" 
+    },
+    {
+        "id": "port",
+        "type": "text",
+        "label": "Port",
+        "default": "6544" 
+    },
+    {
+        "id": "useDataCache",
+        "label": "Use the Plex data caching (for performance reasons)",
+        "type": "bool",
+        "default": "true"
+    },
+    {
+        "id": "cacheTime",
+        "type": "text",
+        "label": "Cache time (sec)",
+        "default": "120" 
+    },
+    {
+        "id": "usePaging",
+        "label": "Divide long recording lists into pages (for performance reasons)",
+        "type": "bool",
+        "default": "true"
+    },
+    {
+        "id": "episodesPerPage",
+        "type": "text",
+        "label": "No of recordings to show per page",
+        "default": "20" 
+    },
+    {
+        "id": "showByRecordingGroup",
+        "label": "Show recordings sorted by MythTV recording group",
+        "type": "bool",
+        "default": "false"
+    },
+    {
+        "id": "showByChannelName",
+        "label": "Show recordings sorted by channel name",
+        "type": "bool",
+        "default": "false"
+    },
+    {
+        "id": "detectSeriesByTitle",
+        "label": "Experimental: detect series by title",
+        "type": "bool",
+        "default": "true"
+    },
+    {
+        "id": "unmangleTitles",
+        "label": "Experimental: fix title/subtitle mangling",
+        "type": "bool",
+        "default": "true"
+    },
+    {
+        "id": "respectMasterBackendOverride",
+        "label": "Respect MythTVs Master Backend Override setting",
+        "type": "bool",
+        "default": "false"
+    }
+]
