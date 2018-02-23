@@ -30,23 +30,20 @@ DETECT_SERIES_BY_TITLE = True
 
 UNMANGLE_TITLES = True
 
-MYTHTV_BACKGROUND = 'mythtv-background.png'
 MYTHTV_ICON = 'mythtv-icon.png'
+MYTHTV_BACKGROUND = 'mythtv-icon.png'
 
-#BY_NAME_ICON  = 'by-name-icon.png'
-BY_NAME_ICON  = 'by-name-background.png'
-BY_NAME_BACKGROUND  = 'by-name-background.png'
+BY_NAME_ICON  = 'by-title-icon.png'
+BY_NAME_BACKGROUND  = 'by-title-icon.png'
 
 BY_DATE_ICON  = 'by-date-icon.png'
-BY_DATE_BACKGROUND  = 'by-date-background.png'
-#BY_DATE_BACKGROUND  = 'by-date-icon.png'
+BY_DATE_BACKGROUND  = 'by-date-icon.png'
 
-#BY_CATEGORY_ICON  = 'by-category-icon.png'
 BY_CATEGORY_ICON  = 'by-category-icon.png'
-BY_CATEGORY_BACKGROUND  = 'by-category-background.png' # TODO: missing
+BY_CATEGORY_BACKGROUND  = 'by-category-background.png'
 
-BY_RECGROUP_ICON  = 'unknown-series-icon.png'
-BY_RECGROUP_BACKGROUND  = 'by-category-background.png'
+BY_RECGROUP_ICON  = 'by-group-icon.png'
+BY_RECGROUP_BACKGROUND  = 'by-group-icon.png'
 
 UNKNOWN_SERIES_BACKGROUND = 'unknown-series-background.png'
 UNKNOWN_SERIES_ICON = 'unknown-series-icon.png'
@@ -188,24 +185,6 @@ def Start():
 def MainMenu():
     dir=ObjectContainer(art = R(MYTHTV_BACKGROUND))
 
-    # By title:
-    dir.add(
-        DirectoryObject(
-            key=Callback(GroupRecordingsBy, groupByList=['Title'], staticBackground=BY_NAME_BACKGROUND), 
-            title=L2('BY_TITLE'), 
-            thumb=R(BY_NAME_ICON)
-        )
-    )
-    
-    # By category, then by title:
-    dir.add(
-        DirectoryObject(
-            key=Callback(GroupRecordingsBy, groupByList=['Category', 'Title'], staticBackground=BY_CATEGORY_BACKGROUND), 
-            title=L2('BY_CATEGORY'), 
-            thumb=R(BY_CATEGORY_ICON)
-        )
-    )
-
     # By recording group:
     showByRecordingGroup = Prefs['showByRecordingGroup']
     if showByRecordingGroup:
@@ -217,6 +196,33 @@ def MainMenu():
             )
         )
 
+    # By recording date:
+    dir.add(
+        DirectoryObject(
+            key=Callback(GetRecordingList, sortKeyName='StartTime', staticBackground=BY_DATE_BACKGROUND), 
+            title=L2('BY_RECORDING_DATE'), 
+            thumb=R(BY_DATE_ICON)
+        )
+    )
+
+    # By title:
+    dir.add(
+        DirectoryObject(
+            key=Callback(GroupRecordingsBy, groupByList=['Title'], staticBackground=BY_NAME_BACKGROUND), 
+            title=L2('BY_TITLE'), 
+            thumb=R(BY_NAME_ICON)
+        )
+    )
+
+    # By category, then by title:
+    dir.add(
+        DirectoryObject(
+            key=Callback(GroupRecordingsBy, groupByList=['Category', 'Title'], staticBackground=BY_CATEGORY_BACKGROUND), 
+            title=L2('BY_CATEGORY'), 
+            thumb=R(BY_CATEGORY_ICON)
+        )
+    )
+
     # By channel name:
     showByChannelName = Prefs['showByChannelName']
     if showByChannelName:
@@ -226,15 +232,6 @@ def MainMenu():
                 title=L2('BY_CHANNEL')
             )
         )
-
-    # By recording date:
-    dir.add(
-        DirectoryObject(
-            key=Callback(GetRecordingList, sortKeyName='StartTime', staticBackground=BY_DATE_BACKGROUND), 
-            title=L2('BY_RECORDING_DATE'), 
-            thumb=R(BY_DATE_ICON)
-        )
-    )
 
     # Preferences:
     dir.add(
@@ -668,7 +665,7 @@ def Recording(recording, seriesInetRef = None, staticBackground = None):
 		if channel == '0':
 			channel = None
 	except:
-		Warning('Recording: Recording: "%s", Could not get channel ID' % showname)			
+		Warning('Recording: Recording: "%s", Could not get channel ID' % showname)
 		channel = None
 
 	
